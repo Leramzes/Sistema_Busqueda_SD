@@ -37,6 +37,7 @@ while endMenu == False:
                 result = conn.root.exposed_retirar(mount,user)
                 print(result)
             if opc == 3:
+                #generar transaccion
                 pass
             if opc == 4:
                 logeado = False
