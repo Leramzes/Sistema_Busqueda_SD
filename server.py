@@ -22,6 +22,7 @@ class MiClaseService(Service):
             return True
         return False
 
+    #agg logica para descontar saldo de quien deposita otro user
     def exposed_depositar(self, amount, sender, receiver):
         userReceiver = receiver.upper()
         userSender = sender.upper()
