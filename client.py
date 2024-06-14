@@ -29,12 +29,12 @@ while endMenu == False:
 
             if opc == 1:
                 userReceiver = str(input("Ingrese el código del usuario a depositar: "))
-                mount = float(input("Ingrese el monto a depositar: "))
-                result = conn.root.exposed_depositar(mount,user,userReceiver)
+                amount = float(input("Ingrese el monto a depositar: "))
+                result = conn.root.exposed_depositar(amount,user,userReceiver)
                 print(result)
             if opc == 2:
-                mount = float(input("Ingrese el monto a retirar: "))
-                result = conn.root.exposed_retirar(mount,user)
+                amount = float(input("Ingrese el monto a retirar: "))
+                result = conn.root.exposed_retirar(amount,user)
                 print(result)
             if opc == 3:
                 #generar transaccion

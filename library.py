@@ -4,6 +4,7 @@ from datetime import datetime
 import os
 import json
 import hashlib
+from uuid import uuid1
 
 # Funcion para enviar comandos a un server
 def enviar_comando(host, port, comando):
@@ -52,10 +53,18 @@ def buscar_igual(lista, key, val):
     return False
 #fin_buscar_igual
 
-#todo: listar transacciones
-def guardar_transaccion():
-     pass
-     
+#todo: guardar_transaccion
+def guardar_transaccion(typeTransaction, user, amount, data):
+    transaccion = {
+        "id": str(uuid1()),
+        "tipo": typeTransaction,
+        "usuario": user.upper(),
+        "monto": amount
+    }
+    for usuario in data:
+        if usuario["usuario"] == user.upper():
+            usuario["transacciones"].append(transaccion)
+            guardar_archivo(data, "data.txt")
 
 
 

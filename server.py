@@ -22,24 +22,25 @@ class MiClaseService(Service):
             return True
         return False
 
-    def exposed_depositar(self, mount, sender, receiver):
+    def exposed_depositar(self, amount, sender, receiver):
         userReceiver = receiver.upper()
         userSender = sender.upper()
         for users in self.data:
             if users["usuario"] == userReceiver:
-                users["saldo"] += mount
+                users["saldo"] += amount
                 guardar_archivo(self.data, "data.txt")
                 if userSender != userReceiver:
+                    #guardar_transaccion("Depósito",userSender,amount,self.data)
                     return "Deposito realizado correctamente a " + users["usuario"]
                 else:
                     return "Deposito realizado correctamente a su cuenta"
         return "No se encontro el usuario"
     
-    def exposed_retirar(self, mountRetire, user):
+    def exposed_retirar(self, amountRetire, user):
         for users in self.data:
             if users["usuario"] == user.upper():
-                if users["saldo"] >= mountRetire:
-                    users["saldo"] -= mountRetire
+                if users["saldo"] >= amountRetire:
+                    users["saldo"] -= amountRetire
                     guardar_archivo(self.data, "data.txt")
                     return "Retiro realizado correctamente.\nSaldo actual: "+str(users["saldo"])
                 else:
