@@ -3,7 +3,6 @@ from rpyc.utils.server import ThreadedServer
 from library import *
 
 
-
 class MiClaseService(Service):
     def __init__(self):
         self.data = leer_archivo("data.txt")
@@ -79,14 +78,7 @@ class MiClaseService(Service):
                 return transactions_list 
 
         return None  
-                
-                
-
-        
-
-
-
-        
+                    
 
 
 if __name__ == "__main__":
