@@ -76,7 +76,7 @@ class MiClaseService(Service):
                         "Monto": transaction["monto"]
                     }
                     transactions_list.append(transaction_info)
-                return transactions_list  # Devuelve la lista de transacciones encontradas
+                return transactions_list 
 
         return None  
                 
