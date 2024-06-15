@@ -14,7 +14,6 @@ while endMenu == False:
     print("#### SISTEMA DE TRANSACCIONES BANCARIAS ####")
     user = input("Ingrese su usuario: ")
     password = getpass.getpass("Ingrese su clave: ")
-    print(password)
 
     logeado = conn.root.exposed_logear(user, password)
     if logeado:
