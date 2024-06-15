@@ -1,5 +1,6 @@
 import rpyc
 from library import *
+import getpass
 
 host_server = "localhost"
 port_server = 7000
@@ -12,7 +13,10 @@ while endMenu == False:
 
     print("#### SISTEMA DE TRANSACCIONES BANCARIAS ####")
     user = input("Ingrese su usuario: ")
-    password = input("Ingrese su clave: ")
+    #PROBAR ESTO
+    #password = input("Ingrese su clave: ")
+    password = getpass.getpass("Ingrese su clave: ")
+    print(password)
 
     logeado = conn.root.exposed_logear(user, password)
     if logeado:
@@ -39,13 +43,9 @@ while endMenu == False:
             if opc == 3:
                 result = conn.root.listar_Transaction(user)
                 print(format_transacciones(result))
-                #print("Muy pronto podrá ver sus transacciones")
-                pass
             if opc == 4:
                 logeado = False
         
 
     else:
         print("Credenciales incorrectas")
-
-#fin_menu
