@@ -1,6 +1,6 @@
 import rpyc
 from library import *
-from getpass import getpass
+import getpass
 
 host_server = "localhost"
 port_server = 7000

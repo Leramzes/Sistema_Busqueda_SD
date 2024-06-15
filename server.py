@@ -43,6 +43,7 @@ class MiClaseService(Service):
                         guardar_transaccionD("Deposito", userReceiver, userSender, amount, self.data)
                         return f"Depósito realizado correctamente a {userReceiver}"
             else:
+                guardar_transaccionD("Deposito a cuenta propia", userReceiver, userSender, amount, self.data)
                 return "Depósito realizado correctamente a su cuenta"
         else:
             return "No se encontró el usuario"
