@@ -1,6 +1,6 @@
 import rpyc
 from library import *
-import getpass
+from getpass import getpass
 
 host_server = "localhost"
 port_server = 7000
@@ -13,8 +13,6 @@ while endMenu == False:
 
     print("#### SISTEMA DE TRANSACCIONES BANCARIAS ####")
     user = input("Ingrese su usuario: ")
-    #PROBAR ESTO
-    #password = input("Ingrese su clave: ")
     password = getpass.getpass("Ingrese su clave: ")
     print(password)
 
@@ -42,9 +40,13 @@ while endMenu == False:
                 print(result)
             if opc == 3:
                 result = conn.root.listar_Transaction(user)
-                print(format_transacciones(result))
+                if result == []:
+                    print("No hay transacciones")
+                else:
+                    print(format_transacciones(result))
             if opc == 4:
                 logeado = False
+                print("Exit\n")
         
 
     else:
