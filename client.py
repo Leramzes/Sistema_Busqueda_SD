@@ -40,14 +40,13 @@ while endMenu == False:
                 print(result)
             if opc == 3:
                 result = conn.root.listar_Transaction(user)
-                if result == []:
-                    print("No hay transacciones")
+                if not result:
+                    print("No tiene transacciones registradas")
                 else:
                     print(format_transacciones(result))
             if opc == 4:
                 logeado = False
                 print("Exit\n")
-        
 
     else:
         print("Credenciales incorrectas")
