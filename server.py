@@ -59,10 +59,27 @@ class MiClaseService(Service):
                     return f"No tiene saldo suficiente.\nSaldo actual: {str(users["saldo"])}"
         return "No se encontro el usuario"
     
-    def exposed_listarTransaction(self, user):
+    def exposed_listar_Transaction(self, user):
+        user = user.upper()
+        transactions_list = []
+        
         for usuario in self.data:
-            if usuario["usuario"] == user.upper():
-                usuario["transacc"]
+            if usuario["usuario"] == user:
+                if "transacciones" in usuario:
+                    for transaction in usuario["transacciones"]:
+                        transaction_info = {
+                            "ID": transaction["id"],
+                            "Tipo": transaction["tipo"],
+                            "Fecha": transaction["fecha"],
+                            "Usuario Origen": transaction.get("usuario origen", None),
+                            "Usuario Destino": transaction.get("usuario destino", None),
+                            "Monto": transaction["monto"]
+                        }
+                        transactions_list.append(transaction_info)
+                    return transactions_list  # Devuelve la lista de transacciones encontradas
+                else:
+                    return []  # Devuelve una lista vacía si el usuario no tiene transacciones
+        return None  # Devuelve None si no se encuentra el usuario en self.data
                 
                 
 

@@ -81,6 +81,22 @@ def guardar_transaccionR(typeTransaction, userSender, amount, data):
             usuario["transacciones"].append(transaccion)
             guardar_archivo(data, "data.txt")
 
+#todo: listar transacciones
+def format_transacciones(transactions_list):
+    formatted_output = []
+    for transaction in transactions_list:
+        formatted_transaction = (
+            f"ID: {transaction['ID']}\n"
+            f"Tipo: {transaction['Tipo']}\n"
+            f"Fecha: {transaction['Fecha']}\n"
+            f"Usuario Origen: {transaction['Usuario Origen']}\n"
+            f"Usuario Destino: {transaction['Usuario Destino']}\n"
+            f"Monto: {transaction['Monto']}\n"
+            "-----------------------------------\n"
+        )
+        formatted_output.append(formatted_transaction)
+    
+    return "\n".join(formatted_output)
 
 
 def limpiar_log_buffer(llb):

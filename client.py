@@ -37,7 +37,9 @@ while endMenu == False:
                 result = conn.root.exposed_retirar(amount,user)
                 print(result)
             if opc == 3:
-                print("Muy pronto podrá ver sus transacciones")
+                result = conn.root.listar_Transaction(user)
+                print(format_transacciones(result))
+                #print("Muy pronto podrá ver sus transacciones")
                 pass
             if opc == 4:
                 logeado = False
