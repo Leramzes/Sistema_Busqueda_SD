@@ -22,20 +22,30 @@ class MiClaseService(Service):
             return True
         return False
 
-    #agg logica para descontar saldo de quien deposita otro user
     def exposed_depositar(self, amount, sender, receiver):
         userReceiver = receiver.upper()
         userSender = sender.upper()
-        for users in self.data:
-            if users["usuario"] == userReceiver:
-                users["saldo"] += amount
+        
+        receiver_found = False
+        for user in self.data:
+            if user["usuario"] == userReceiver:
+                user["saldo"] += amount
                 guardar_archivo(self.data, "data.txt")
-                if userSender != userReceiver:
-                    #guardar_transaccion("Depósito",userSender,amount,self.data)
-                    return "Deposito realizado correctamente a " + users["usuario"]
-                else:
-                    return "Deposito realizado correctamente a su cuenta"
-        return "No se encontro el usuario"
+                receiver_found = True
+                break
+        
+        if receiver_found:
+            if userSender != userReceiver:
+                for user in self.data:
+                    if user["usuario"] == userSender:
+                        user["saldo"] -= amount
+                        guardar_archivo(self.data, "data.txt")
+                        guardar_transaccionD("Deposito", userReceiver, userSender, amount, self.data)
+                        return f"Depósito realizado correctamente a {userReceiver}"
+            else:
+                return "Depósito realizado correctamente a su cuenta"
+        else:
+            return "No se encontró el usuario"
     
     def exposed_retirar(self, amountRetire, user):
         for users in self.data:
@@ -43,11 +53,19 @@ class MiClaseService(Service):
                 if users["saldo"] >= amountRetire:
                     users["saldo"] -= amountRetire
                     guardar_archivo(self.data, "data.txt")
-                    return "Retiro realizado correctamente.\nSaldo actual: "+str(users["saldo"])
+                    guardar_transaccionR("Retiro", user, amountRetire, self.data)
+                    return f"Retiro realizado correctamente.\nSaldo actual: {str(users["saldo"])}"
                 else:
-                    return "No tiene saldo suficiente.\nSaldo actual: "+str(users["saldo"])
-        
+                    return f"No tiene saldo suficiente.\nSaldo actual: {str(users["saldo"])}"
         return "No se encontro el usuario"
+    
+    def exposed_listarTransaction(self, user):
+        for usuario in self.data:
+            if usuario["usuario"] == user.upper():
+                usuario["transacc"]
+                
+                
+
         
 
 

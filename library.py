@@ -53,16 +53,31 @@ def buscar_igual(lista, key, val):
     return False
 #fin_buscar_igual
 
-#todo: guardar_transaccion
-def guardar_transaccion(typeTransaction, user, amount, data):
+#todo: guardar_transaccionD
+def guardar_transaccionD(typeTransaction, userReceiver, userSender, amount, data):
     transaccion = {
         "id": str(uuid1()),
         "tipo": typeTransaction,
-        "usuario": user.upper(),
+        "fecha": datetime.now().isoformat(),
+        "usuario origen": userSender.upper(),
+        "usuario destino": userReceiver.upper(),
         "monto": amount
     }
     for usuario in data:
-        if usuario["usuario"] == user.upper():
+        if usuario["usuario"] == userSender.upper():
+            usuario["transacciones"].append(transaccion)
+            guardar_archivo(data, "data.txt")
+
+#todo: guardar_transaccionR
+def guardar_transaccionR(typeTransaction, userSender, amount, data):
+    transaccion = {
+        "id": str(uuid1()),
+        "tipo": typeTransaction,
+        "fecha": datetime.now().isoformat(),
+        "monto": amount
+    }
+    for usuario in data:
+        if usuario["usuario"] == userSender.upper():
             usuario["transacciones"].append(transaccion)
             guardar_archivo(data, "data.txt")
 
