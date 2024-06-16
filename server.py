@@ -54,9 +54,9 @@ class MiClaseService(Service):
                     users["saldo"] -= amountRetire
                     guardar_archivo(self.data, "data.txt")
                     guardar_transaccionR("Retiro", user, amountRetire, self.data)
-                    return f"Retiro realizado correctamente.\nSaldo actual: {str(users["saldo"])}"
+                    return f"Retiro realizado correctamente.\nSaldo actual: {str(users['saldo'])}"
                 else:
-                    return f"No tiene saldo suficiente.\nSaldo actual: {str(users["saldo"])}"
+                    return f"No tiene saldo suficiente.\nSaldo actual: {str(users['saldo'])}"
         return "No se encontro el usuario"
     
     def exposed_listar_Transaction(self, user):
@@ -78,7 +78,12 @@ class MiClaseService(Service):
                 return transactions_list 
 
         return None  
-                    
+    
+    def exposed_ver_saldo(self, user):
+        for users in self.data:
+            if users["usuario"] == user.upper():
+                return users['saldo']
+            
 
 
 if __name__ == "__main__":

@@ -24,7 +24,8 @@ while endMenu == False:
             print("# 1. Movimiento-Depositar#")
             print("# 2. Movimiento-Retirar  #")
             print("# 3. Ver Transacciones   #")
-            print("# 4. Salir               #")
+            print("# 4. Ver Saldo           #")
+            print("# 5. Salir               #")
             print("##########################")
             opc = int(input("Ingrese su opcion:"))
 
@@ -43,7 +44,10 @@ while endMenu == False:
                     print("No tiene transacciones registradas")
                 else:
                     print(format_transacciones(result))
-            if opc == 4:
+            if opc==4:
+                result = conn.root.exposed_ver_saldo(user)
+                print(f"Su saldo actual es: {result}")
+            if opc == 5:
                 logeado = False
                 print("Exit\n")
 
